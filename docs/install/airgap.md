@@ -134,7 +134,7 @@ RKE2 in airgap can be installed using the binary or the install script
 
 #### Binaries
 - Download the RKE2 binary file `rke2.linux-amd64` from the [releases](https://github.com/rancher/rke2/releases) page, matching the same version and architecture used to get the airgap images. Place the binary in `/usr/local/bin` on each air-gapped node and ensure it is executable.
-- Run the binary with the desired parameters. For example, if using the Private Registry Method, your config file would have the following:
+- Run the binary with the desired parameters. For example, if using the Private Registry Method to [load the images](#1-load-images), your config file must point to it:
 
 ```yaml
 system-default-registry: "registry.example.com:5000"
@@ -159,7 +159,16 @@ curl -sfL https://get.rke2.io --output install.sh
 ```bash
 INSTALL_RKE2_ARTIFACT_PATH=/root/rke2-artifacts sh install.sh
 ```
-3. Enable and run the service as outlined [here.](quickstart.md#2-enable-the-rke2-server-service)
+
+3. If using the Private Registry Method to [load the images](#1-load-images), your config file must point to it:
+
+```yaml
+system-default-registry: "registry.example.com:5000"
+```
+
+**Note:** The `system-default-registry` parameter must specify only valid RFC 3986 URI authorities, i.e. a host and optional port.
+
+4. Enable and run the service as outlined [here.](quickstart.md#2-enable-the-rke2-server-service)
 
 </TabItem>
 </Tabs>
